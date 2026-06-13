@@ -432,6 +432,7 @@
           throw new Error(data.message || 'Submission failed');
         }
       } catch (err) {
+        console.error('Form submission failed:', err);   // e.g. "This form needs Activation" until the one-time activation link is clicked
         statusEl.className = 'form-status err';
         statusEl.textContent = 'Sorry, something went wrong. Please email ' + EMAIL + ' directly.';
         btn.disabled = false;
