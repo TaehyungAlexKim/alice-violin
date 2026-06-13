@@ -413,10 +413,8 @@
       btn.disabled = true;
 
       try {
-        // Endpoint built from EMAIL so the address isn't in static HTML.
-        // After activation, replace this whole expression with your alias, e.g.
-        //   const endpoint = 'https://formsubmit.co/ajax/YOUR_ALIAS';
-        const endpoint = 'https://formsubmit.co/ajax/' + EMAIL;
+        // Formsubmit random alias (activated) — keeps the teacher's email out of the source.
+        const endpoint = 'https://formsubmit.co/ajax/d86d81472234d48dff7c9f53055a3caa';
         const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
