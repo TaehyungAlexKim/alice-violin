@@ -15,10 +15,9 @@
    - 선생님이 평생 할 일: 이 활성화 버튼 1번 클릭. 가입·로그인·키 일절 없음.
    - 폼의 학생 `email` 칸 덕분에 선생님이 메일에 **"답장"하면 학생에게 회신**됨.
 
-### (선택) 이메일 주소 숨기기 — 스팸봇 차단
-위 활성화 메일 안에 **랜덤 별칭(alias) URL**(예: `https://formsubmit.co/a1b2c3...`)이 들어 있음.
-`index.html` 의 fetch URL을 `https://formsubmit.co/ajax/jjyvn@hotmail.com` → `https://formsubmit.co/ajax/a1b2c3...` 로 바꾸면
-소스코드에 선생님 이메일이 노출되지 않아 스팸 수집을 막을 수 있음.
+### 이메일 숨김 — 완료 (2026-06-12)
+폼은 **활성화된 Formsubmit 별칭**(`/ajax/d86d8147...`)으로 전송하므로 소스에 선생님 이메일이 노출되지 않음.
+보이는 메일/전화 클릭 링크는 JS로 조립(역시 정적 소스엔 평문 없음). 별칭을 다시 발급/변경하려면 `index.html` 의 `endpoint` 한 줄만 교체.
 
 ## GitHub Pages 배포
 ```bash
