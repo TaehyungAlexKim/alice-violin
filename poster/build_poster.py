@@ -81,19 +81,19 @@ d = ImageDraw.Draw(img)
 cx = W // 2
 
 # faint German accent (like original "Spaß mit musik")
-tracked(d, cx, 92, "Spaß mit Musik", f_geo_i(30), (199, 184, 150), 2)
+tracked(d, cx, 90, "Spaß mit Musik", f_geo_i(30), (199, 184, 150), 2)
 
 # ---- title ----
-tracked(d, cx, 196, "VIOLIN",  f_didot(132, 2), NAVY, 8)
-tracked(d, cx, 322, "LESSONS", f_didot(132, 2), NAVY, 8)
+tracked(d, cx, 186, "VIOLIN",  f_didot(132, 2), NAVY, 8)
+tracked(d, cx, 308, "LESSONS", f_didot(132, 2), NAVY, 8)
 
 # divider with diamond
-dy = 405
+dy = 388
 d.line([(cx-150, dy), (cx-22, dy)], fill=GOLD, width=2)
 d.line([(cx+22, dy), (cx+150, dy)], fill=GOLD, width=2)
 d.polygon([(cx, dy-9), (cx+11, dy), (cx, dy+9), (cx-11, dy)], fill=GOLD)
 
-tracked(d, cx, 452, "PRIVATE 1:1 INSTRUCTION", f_geo(33), GOLD, 8)
+tracked(d, cx, 434, "PRIVATE 1:1 INSTRUCTION", f_geo(33), GOLD, 8)
 
 # ---- triptych ----
 panels = [
@@ -102,8 +102,8 @@ panels = [
     ("korea.webp",     "KOREA",     0.5, 0.5),
 ]
 pw = (W - 2*M - 2*30) // 3
-ph = 250
-ty = 506
+ph = 246
+ty = 488
 capf = f_geo(27)
 for i, (fn, cap, ox, oy) in enumerate(panels):
     x0 = M + i*(pw + 30)
@@ -115,22 +115,22 @@ for i, (fn, cap, ox, oy) in enumerate(panels):
     tracked(d, x0+pw/2, ty+ph+44, cap, capf, NAVY, 5)
 
 # ---- teacher ----
-by = ty + ph + 110            # ~866
+by = ty + ph + 92
 tracked(d, cx, by, "Ja Young (Alice) Jeon", f_didot(54, 0), NAVY, 2)
-d.text((cx, by+50), "Bachelor & Master of Music (Germany)", font=f_geo_i(31), fill=INK, anchor="mm")
-d.text((cx, by+95), "Beginners to Advanced  ·  RCM Exam Prep  ·  Vancouver, BC",
+d.text((cx, by+48), "Bachelor & Master of Music (Germany)", font=f_geo_i(31), fill=INK, anchor="mm")
+d.text((cx, by+90), "Beginners to Advanced  ·  RCM Exam Prep  ·  Vancouver, BC",
        font=f_geo(27), fill=INK, anchor="mm")
 
 # ---- QR card ----
 qr_png = os.path.join(HERE, "_qr_navy.png")
-segno.make(URL, error="h").save(qr_png, scale=9, border=4, dark="#21384e", light="#fcfaf5")
+segno.make(URL, error="h").save(qr_png, scale=8, border=4, dark="#21384e", light="#fcfaf5")
 qr = Image.open(qr_png).convert("RGB")
-QSZ = qr.size[0]                       # 57 modules * 9 = 513
-pad_top, cap_h = 46, 150
+QSZ = qr.size[0]                       # 57 modules * 8 = 456
+pad_top, cap_h = 40, 138
 cardw = QSZ + 2*64
 cardh = pad_top + QSZ + cap_h
 card_x = cx - cardw//2
-card_y = by + 150                      # ~1016
+card_y = by + 130
 rrect(d, [card_x, card_y, card_x+cardw, card_y+cardh], 26, fill=CARD, outline=GOLDS, width=2)
 img.paste(qr, (cx - QSZ//2, card_y + pad_top))
 qcap_y = card_y + pad_top + QSZ + 18
@@ -138,11 +138,12 @@ tracked(d, cx, qcap_y+16, "SCAN THE QR CODE", f_geo(31), GOLD, 6)
 d.text((cx, qcap_y+62), "to see lessons, philosophy & contact",
        font=f_geo_i(28), fill=INK, anchor="mm")
 
-# ---- footer ----
-fy = card_y + cardh + 58
+# ---- footer ---- (kept well clear of the bottom edge: printers over-scan ~0.5cm)
+fy = card_y + cardh + 46
 d.line([(M+40, fy), (W-M-40, fy)], fill=GOLDS, width=1)
-tracked(d, cx, fy+34, "JA YOUNG (ALICE) JEON   ·   VANCOUVER, BC",
+tracked(d, cx, fy+30, "JA YOUNG (ALICE) JEON   ·   VANCOUVER, BC",
         f_geo(25), NAVY, 4)
+print("footer baseline y =", fy+30, "| bottom margin px =", H-(fy+30))
 
 out = os.path.join(HERE, "violin-mini-poster.png")
 img.save(out, dpi=(300, 300))
